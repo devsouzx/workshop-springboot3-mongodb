@@ -1,6 +1,7 @@
 package com.devsouzx.workshopmongo.services;
 
 import com.devsouzx.workshopmongo.domain.User;
+import com.devsouzx.workshopmongo.dto.UserDTO;
 import com.devsouzx.workshopmongo.repositories.UserRepository;
 import com.devsouzx.workshopmongo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("User not found"));
+    }
+
+    public User insert(User user) {
+        return userRepository.insert(user);
+    }
+
+    public User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }
