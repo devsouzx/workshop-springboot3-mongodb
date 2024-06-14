@@ -1,9 +1,11 @@
 package com.devsouzx.workshopmongo.domain;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
+@Document
 @Getter
 @Setter
 @AllArgsConstructor
