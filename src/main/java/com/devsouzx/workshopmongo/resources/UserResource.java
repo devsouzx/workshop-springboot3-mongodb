@@ -1,8 +1,10 @@
 package com.devsouzx.workshopmongo.resources;
 
+import com.devsouzx.workshopmongo.domain.Post;
 import com.devsouzx.workshopmongo.domain.User;
 import com.devsouzx.workshopmongo.dto.UserDTO;
 import com.devsouzx.workshopmongo.services.UserService;
+import com.fasterxml.jackson.databind.node.POJONode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +50,11 @@ public class UserResource {
     public ResponseEntity<User> update(@PathVariable String id, @RequestBody User user) {
         user = userService.update(id, user);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok(user.getPosts());
     }
 }
